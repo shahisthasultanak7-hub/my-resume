@@ -11,25 +11,34 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="ambient-shape shape-one" aria-hidden="true"></div>
+  <div class="ambient-shape shape-two" aria-hidden="true"></div>
+
   <div class="page-shell">
-    <header class="hero">
-      <p class="eyebrow">Senior Business Intelligence Developer</p>
-      <h1>Shahistha Sultana K</h1>
-      <p class="tagline">8+ years building high-impact Tableau and OAC analytics solutions from SQL to executive dashboards.</p>
-      <div class="cta-row">
-        <a href="mailto:shahisthasultanak7@gmail.com" class="btn primary">Email</a>
-        <a href="https://www.linkedin.com/in/shahistha-kareem-basha-a89802190" class="btn ghost" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="Shahistha_Senior_BI_Developer_Resume.pdf" class="btn ghost" target="_blank" rel="noreferrer">Download Resume</a>
+    <header class="hero reveal">
+      <div class="hero-left">
+        <p class="eyebrow">Senior Business Intelligence Developer</p>
+        <h1>Shahistha Sultana K</h1>
+        <p class="tagline">8+ years building high-impact Tableau and OAC analytics solutions from SQL to executive dashboards.</p>
+        <div class="cta-row">
+          <a href="mailto:shahisthasultanak7@gmail.com" class="btn primary">Email</a>
+          <a href="https://www.linkedin.com/in/shahistha-kareem-basha-a89802190" class="btn ghost" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="Shahistha_Senior_BI_Developer_Resume.pdf" class="btn ghost" target="_blank" rel="noreferrer">Download Resume</a>
+        </div>
       </div>
-      <div class="meta">
-        <span>Bangalore, India</span>
-        <span>+91 99622 28727</span>
-        <span>Healthcare + Enterprise Analytics</span>
+
+      <div class="hero-right">
+        <ul class="highlight-list">
+          <li><span>Location</span><strong>Bangalore, India</strong></li>
+          <li><span>Phone</span><strong>+91 99622 28727</strong></li>
+          <li><span>Specialization</span><strong>Healthcare + Enterprise Analytics</strong></li>
+          <li><span>Tool Stack</span><strong>Tableau, OAC, SQL, ADW</strong></li>
+        </ul>
       </div>
     </header>
 
     <main class="grid">
-      <section class="card summary">
+      <section class="card summary reveal delay-1">
         <h2>Professional Summary</h2>
         <p>
           Senior Business Intelligence Developer with deep expertise in Tableau, Oracle Analytics Cloud, and enterprise SQL.
@@ -37,10 +46,10 @@
         </p>
       </section>
 
-      <section class="card skills">
+      <section class="card skills reveal delay-2">
         <h2>Core Skills</h2>
         <ul class="pill-list">
-          <li>Tableau Desktop & Server</li>
+          <li>Tableau Desktop and Server</li>
           <li>Oracle Analytics Cloud</li>
           <li>Advanced SQL / PL-SQL</li>
           <li>ETL / ELT</li>
@@ -50,17 +59,63 @@
           <li>JIRA, Git, Agile / Scrum</li>
           <li>Dashboard UX / Data Storytelling</li>
           <li>Performance Tuning</li>
-          <li>Data Governance & Compliance</li>
+          <li>Data Governance and Compliance</li>
         </ul>
       </section>
 
-      <section class="card experience">
+      <section class="card portfolio reveal delay-2">
+        <h2>Featured Tableau Dashboards</h2>
+        <p class="portfolio-intro">Interactive samples from Tableau Public. Replace these URLs with your own dashboard links as you publish more projects.</p>
+
+        <div class="dashboard-grid">
+          <article class="dashboard-card">
+            <h3>Healthcare Operations Overview</h3>
+            <div class="viz-frame">
+              <iframe
+                title="Healthcare Operations Overview"
+                src="https://public.tableau.com/views/RegionalSampleWorkbook/Stocks?:showVizHome=no"
+                loading="lazy"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <a class="viz-link" href="https://public.tableau.com/views/RegionalSampleWorkbook/Stocks?:showVizHome=no" target="_blank" rel="noreferrer">Open in Tableau Public</a>
+          </article>
+
+          <article class="dashboard-card">
+            <h3>Population Health Snapshot</h3>
+            <div class="viz-frame">
+              <iframe
+                title="Population Health Snapshot"
+                src="https://public.tableau.com/views/RegionalSampleWorkbook/College?:showVizHome=no"
+                loading="lazy"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <a class="viz-link" href="https://public.tableau.com/views/RegionalSampleWorkbook/College?:showVizHome=no" target="_blank" rel="noreferrer">Open in Tableau Public</a>
+          </article>
+
+          <article class="dashboard-card">
+            <h3>Executive KPI Storyboard</h3>
+            <div class="viz-frame">
+              <iframe
+                title="Executive KPI Storyboard"
+                src="https://public.tableau.com/views/RegionalSampleWorkbook/Flights?:showVizHome=no"
+                loading="lazy"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <a class="viz-link" href="https://public.tableau.com/views/RegionalSampleWorkbook/Flights?:showVizHome=no" target="_blank" rel="noreferrer">Open in Tableau Public</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="card experience reveal delay-3">
         <h2>Experience</h2>
 
         <article class="role">
           <div class="role-head">
             <h3>Senior Business Intelligence Developer</h3>
-            <p>Oracle Cerner · Bangalore</p>
+            <p>Oracle Cerner - Bangalore</p>
             <span>Dec 2022 - Present</span>
           </div>
           <ul>
@@ -112,7 +167,7 @@
         </article>
       </section>
 
-      <section class="card education">
+      <section class="card education reveal delay-3">
         <h2>Education</h2>
         <ul>
           <li><strong>Master of Technology, Computer Science Engineering</strong> - VTU (2018-2020), 85%</li>
@@ -120,8 +175,8 @@
         </ul>
       </section>
 
-      <section class="card certifications">
-        <h2>Certifications & Recognition</h2>
+      <section class="card certifications reveal delay-4">
+        <h2>Certifications and Recognition</h2>
         <ul>
           <li>Leading SAFe 6.0 Agilist</li>
           <li>Oracle Cloud Infrastructure 2025 Certified Generative AI Professional</li>
