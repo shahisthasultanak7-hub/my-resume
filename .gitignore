@@ -1,0 +1,10 @@
+cloudflared.exe
+cloudflared.log
+cloudflared.out.log
+cloudflared.err.log
+public_url.txt
+resume_server.pid
+resume_stdout.log
+resume_stderr.log
+http_server.pid
+cloudflared.pid
