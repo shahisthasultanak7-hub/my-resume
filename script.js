@@ -113,6 +113,10 @@
       return 'I am a fast learner with a strong track record of adapting to new analytics platforms, data models, and client environments while maintaining delivery quality.';
     }
 
+    if (q.includes('do you know') || q.includes('experience with') || q.includes('worked on')) {
+      return 'I may not have that exact keyword listed in this resume, but I have strong adjacent experience in enterprise BI, cloud data/reporting platforms, and rapid onboarding to new tools. I can ramp up quickly in similar environments.';
+    }
+
     if (q.includes('do you know') && (q.includes('sql') || q.includes('tableau') || q.includes('oac') || q.includes('oracle analytics'))) {
       return 'Yes. This area is part of my core delivery experience.';
     }
@@ -142,9 +146,12 @@
     if (local) {
       return local;
     }
-    const model = await fetchModelAnswer(question);
-    if (model && normalize(model) !== 'na') {
-      return model;
+    const isGitHubPages = window.location.hostname.endsWith('github.io');
+    if (!isGitHubPages) {
+      const model = await fetchModelAnswer(question);
+      if (model && normalize(model) !== 'na') {
+        return model;
+      }
     }
     const adaptive = adaptiveFallbackAnswer(question);
     if (adaptive) {
