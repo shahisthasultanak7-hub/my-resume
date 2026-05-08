@@ -55,7 +55,7 @@
     { keys: ['linkedin'], answer: 'https://www.linkedin.com/in/shahistha-kareem-basha-a89802190' },
     { keys: ['email', 'contact'], answer: 'shahisthasultanak7@gmail.com' },
     { keys: ['phone', 'mobile'], answer: '+91 99622 28727' },
-    { keys: ['tableau', 'dashboard', 'portfolio', 'vizzes'], answer: 'Tableau Public profile: https://public.tableau.com/app/profile/shahistha.sultana.k/vizzes' },
+    { keys: ['tableau', 'dashboard', 'portfolio', 'vizzes'], answer: 'Yes. Tableau is one of my core strengths. Tableau Public profile: https://public.tableau.com/app/profile/shahistha.sultana.k/vizzes' },
     { keys: ['award', 'recognition'], answer: 'Cerner "You Rock" Award (3x) and Cerner "Bravo" Recognition' }
   ];
 
@@ -99,6 +99,27 @@
     return '';
   };
 
+  const adaptiveFallbackAnswer = function (question) {
+    const q = normalize(question);
+    if (!q) {
+      return 'NA';
+    }
+
+    if (q.includes('aws') || q.includes('azure') || q.includes('gcp') || q.includes('cloud')) {
+      return 'I have strong hands-on experience with cloud data/reporting platforms like ADW, Oracle, and Snowflake. While AWS is not listed as a primary delivery stack in this resume, I adapt quickly to adjacent cloud environments and can ramp up fast.';
+    }
+
+    if (q.includes('learn') || q.includes('adapt') || q.includes('new tool') || q.includes('new technology')) {
+      return 'I am a fast learner with a strong track record of adapting to new analytics platforms, data models, and client environments while maintaining delivery quality.';
+    }
+
+    if (q.includes('do you know') && (q.includes('sql') || q.includes('tableau') || q.includes('oac') || q.includes('oracle analytics'))) {
+      return 'Yes. This area is part of my core delivery experience.';
+    }
+
+    return 'NA';
+  };
+
   const fetchModelAnswer = async function (question) {
     try {
       const res = await fetch('/api/resume-chat', {
@@ -107,12 +128,12 @@
         body: JSON.stringify({ question: question })
       });
       if (!res.ok) {
-        return 'NA';
+        return '';
       }
       const payload = await res.json();
-      return (payload.answer || 'NA').toString();
+      return (payload.answer || '').toString().trim();
     } catch (err) {
-      return 'NA';
+      return '';
     }
   };
 
@@ -121,7 +142,11 @@
     if (local) {
       return local;
     }
-    return await fetchModelAnswer(question);
+    const model = await fetchModelAnswer(question);
+    if (model) {
+      return model;
+    }
+    return adaptiveFallbackAnswer(question);
   };
 
   const openChat = function () {
