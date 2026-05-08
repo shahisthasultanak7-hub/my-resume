@@ -56,6 +56,8 @@
     { keys: ['email', 'contact'], answer: 'shahisthasultanak7@gmail.com' },
     { keys: ['phone', 'mobile'], answer: '+91 99622 28727' },
     { keys: ['tableau', 'dashboard', 'portfolio', 'vizzes'], answer: 'Yes. Tableau is one of my core strengths. Tableau Public profile: https://public.tableau.com/app/profile/shahistha.sultana.k/vizzes' },
+    { keys: ['how many tableau dashboards', 'tableau dashboards developed', 'number of tableau dashboards', 'tableau dashboard count'], answer: 'I have developed 40+ Tableau dashboards. Some representative samples are available on my Tableau Public profile: https://public.tableau.com/app/profile/shahistha.sultana.k/vizzes' },
+    { keys: ['how many oac dashboards', 'oac dashboards developed', 'number of oac dashboards', 'oracle analytics cloud dashboards'], answer: 'I have developed and delivered 20+ OAC dashboards across enterprise client environments.' },
     { keys: ['lod', 'lods', 'level of detail', 'tableau calculation', 'calculated field'], answer: 'Yes. I have hands-on experience with Tableau LODs, actions, parameters, and KPI-driven dashboard design in enterprise delivery.' },
     { keys: ['actions', 'parameters', 'kpi'], answer: 'Yes. I regularly use Tableau actions, parameters, and KPI standards in enterprise dashboards.' },
     { keys: ['award', 'recognition'], answer: 'Cerner "You Rock" Award (3x) and Cerner "Bravo" Recognition' }
@@ -107,6 +109,23 @@
     const q = normalize(question);
     if (!q) {
       return defaultAnswer;
+    }
+
+    if (
+      q.includes('how many tableau dashboard') ||
+      q.includes('tableau dashboards have you developed') ||
+      q.includes('number of tableau dashboard')
+    ) {
+      return 'I have developed 40+ Tableau dashboards. Some representative samples are available on my Tableau Public profile: https://public.tableau.com/app/profile/shahistha.sultana.k/vizzes';
+    }
+
+    if (
+      q.includes('how many oac dashboard') ||
+      q.includes('oac dashboards have you developed') ||
+      q.includes('number of oac dashboard') ||
+      q.includes('how many oracle analytics cloud dashboard')
+    ) {
+      return 'I have developed and delivered 20+ OAC dashboards across enterprise client environments.';
     }
 
     if (
