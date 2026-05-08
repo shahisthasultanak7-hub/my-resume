@@ -56,8 +56,12 @@
     { keys: ['email', 'contact'], answer: 'shahisthasultanak7@gmail.com' },
     { keys: ['phone', 'mobile'], answer: '+91 99622 28727' },
     { keys: ['tableau', 'dashboard', 'portfolio', 'vizzes'], answer: 'Yes. Tableau is one of my core strengths. Tableau Public profile: https://public.tableau.com/app/profile/shahistha.sultana.k/vizzes' },
+    { keys: ['lod', 'lods', 'level of detail', 'tableau calculation', 'calculated field'], answer: 'Yes. I have hands-on experience with Tableau LODs, actions, parameters, and KPI-driven dashboard design in enterprise delivery.' },
+    { keys: ['actions', 'parameters', 'kpi'], answer: 'Yes. I regularly use Tableau actions, parameters, and KPI standards in enterprise dashboards.' },
     { keys: ['award', 'recognition'], answer: 'Cerner "You Rock" Award (3x) and Cerner "Bravo" Recognition' }
   ];
+
+  const defaultAnswer = 'I have strong hands-on experience with cloud data/reporting platforms like ADW, Oracle, and Snowflake. While AWS is not listed as a primary delivery stack in this resume, I adapt quickly to adjacent cloud environments and can ramp up fast.';
 
   const normalize = function (text) {
     return text.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
@@ -102,26 +106,67 @@
   const adaptiveFallbackAnswer = function (question) {
     const q = normalize(question);
     if (!q) {
-      return 'NA';
+      return defaultAnswer;
+    }
+
+    if (
+      q.includes('tableau') ||
+      q.includes('lod') ||
+      q.includes('level of detail') ||
+      q.includes('parameters') ||
+      q.includes('actions') ||
+      q.includes('kpi') ||
+      q.includes('rls') ||
+      q.includes('row level security') ||
+      q.includes('table calculation') ||
+      q.includes('calculated field') ||
+      q.includes('dashboard design')
+    ) {
+      return 'Yes. I have strong hands-on Tableau experience including LODs, parameters, actions, KPI design standards, and enterprise dashboard delivery. I have also worked with row-level access patterns in enterprise reporting contexts.';
+    }
+
+    if (
+      q.includes('sql') ||
+      q.includes('pl sql') ||
+      q.includes('plsql') ||
+      q.includes('complex query') ||
+      q.includes('query writing') ||
+      q.includes('sql optimization') ||
+      q.includes('query optimization') ||
+      q.includes('performance tuning') ||
+      q.includes('cte') ||
+      q.includes('stored procedure')
+    ) {
+      return 'Yes. Advanced SQL/PL-SQL is a core strength, including complex query writing, optimization, performance tuning, and production-grade data modeling for reporting.';
+    }
+
+    if (
+      q.includes('ai') ||
+      q.includes('llm') ||
+      q.includes('genai') ||
+      q.includes('machine learning') ||
+      q.includes('chatgpt')
+    ) {
+      return 'I am currently learning AI and LLM-driven workflows, and this resume website itself was developed using LLM-assisted engineering patterns to deliver a faster, more interactive recruiter experience.';
     }
 
     if (q.includes('aws') || q.includes('azure') || q.includes('gcp') || q.includes('cloud')) {
-      return 'I have strong hands-on experience with cloud data/reporting platforms like ADW, Oracle, and Snowflake. While AWS is not listed as a primary delivery stack in this resume, I adapt quickly to adjacent cloud environments and can ramp up fast.';
+      return defaultAnswer;
     }
 
     if (q.includes('learn') || q.includes('adapt') || q.includes('new tool') || q.includes('new technology')) {
       return 'I am a fast learner with a strong track record of adapting to new analytics platforms, data models, and client environments while maintaining delivery quality.';
     }
 
-    if (q.includes('do you know') || q.includes('experience with') || q.includes('worked on')) {
-      return 'I may not have that exact keyword listed in this resume, but I have strong adjacent experience in enterprise BI, cloud data/reporting platforms, and rapid onboarding to new tools. I can ramp up quickly in similar environments.';
-    }
-
     if (q.includes('do you know') && (q.includes('sql') || q.includes('tableau') || q.includes('oac') || q.includes('oracle analytics'))) {
       return 'Yes. This area is part of my core delivery experience.';
     }
 
-    return 'NA';
+    if (q.includes('do you know') || q.includes('experience with') || q.includes('worked on')) {
+      return 'I may not have that exact keyword listed in this resume, but I have strong adjacent experience in enterprise BI, cloud data/reporting platforms, and rapid onboarding to new tools. I can ramp up quickly in similar environments.';
+    }
+
+    return defaultAnswer;
   };
 
   const fetchModelAnswer = async function (question) {
@@ -149,7 +194,14 @@
     const isGitHubPages = window.location.hostname.endsWith('github.io');
     if (!isGitHubPages) {
       const model = await fetchModelAnswer(question);
-      if (model && normalize(model) !== 'na') {
+      const modelNorm = normalize(model);
+      const looksUnavailable = (
+        modelNorm === 'na' ||
+        modelNorm.includes('not found in resume') ||
+        modelNorm.includes('not available') ||
+        modelNorm.includes('not in this resume')
+      );
+      if (model && !looksUnavailable) {
         return model;
       }
     }
@@ -157,7 +209,7 @@
     if (adaptive) {
       return adaptive;
     }
-    return 'NA';
+    return defaultAnswer;
   };
 
   const openChat = function () {
