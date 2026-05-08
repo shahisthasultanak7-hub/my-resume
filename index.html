@@ -200,5 +200,34 @@
       </section>
     </main>
   </div>
+
+  <button class="chat-fab" id="chatFab" type="button" aria-controls="chatPanel" aria-expanded="false">
+    Ask Resume Chat
+  </button>
+
+  <section class="chat-panel" id="chatPanel" aria-label="Resume chat assistant" hidden>
+    <div class="chat-head">
+      <div>
+        <h3>Recruiter Q&A</h3>
+        <p>Ask anything about my resume</p>
+      </div>
+      <button class="chat-close" id="chatClose" type="button" aria-label="Close chat">x</button>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-msg bot">Hi, I can answer resume-related questions. If details are unavailable, I will reply with NA.</div>
+    </div>
+
+    <div class="chat-suggestions">
+      <button type="button" class="chat-chip">What are your core skills?</button>
+      <button type="button" class="chat-chip">How many years of experience?</button>
+      <button type="button" class="chat-chip">Where are you located?</button>
+    </div>
+
+    <form class="chat-form" id="chatForm">
+      <input id="chatInput" type="text" placeholder="Ask a resume question..." autocomplete="off" required>
+      <button type="submit">Send</button>
+    </form>
+  </section>
 </body>
 </html>
