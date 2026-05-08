@@ -71,10 +71,10 @@
     messages.scrollTop = messages.scrollHeight;
   };
 
-  const answerQuestion = function (question) {
+  const localRuleAnswer = function (question) {
     const q = normalize(question);
     if (!q) {
-      return 'NA';
+      return '';
     }
 
     let best = null;
@@ -96,7 +96,32 @@
     if (best && bestScore > 0) {
       return best.answer;
     }
-    return 'NA';
+    return '';
+  };
+
+  const fetchModelAnswer = async function (question) {
+    try {
+      const res = await fetch('/api/resume-chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: question })
+      });
+      if (!res.ok) {
+        return 'NA';
+      }
+      const payload = await res.json();
+      return (payload.answer || 'NA').toString();
+    } catch (err) {
+      return 'NA';
+    }
+  };
+
+  const answerQuestion = async function (question) {
+    const local = localRuleAnswer(question);
+    if (local) {
+      return local;
+    }
+    return await fetchModelAnswer(question);
   };
 
   const openChat = function () {
@@ -120,22 +145,35 @@
 
   closeBtn.addEventListener('click', closeChat);
 
-  form.addEventListener('submit', function (event) {
+  form.addEventListener('submit', async function (event) {
     event.preventDefault();
     const question = input.value.trim();
     if (!question) {
       return;
     }
+    input.disabled = true;
     append(question, 'user');
-    append(answerQuestion(question), 'bot');
+    append('Thinking...', 'bot');
+    const loadingNode = messages.lastElementChild;
+    const answer = await answerQuestion(question);
+    if (loadingNode) {
+      loadingNode.textContent = answer;
+    }
     input.value = '';
+    input.disabled = false;
+    input.focus();
   });
 
   chips.forEach(function (chip) {
-    chip.addEventListener('click', function () {
+    chip.addEventListener('click', async function () {
       const q = chip.textContent || '';
       append(q, 'user');
-      append(answerQuestion(q), 'bot');
+      append('Thinking...', 'bot');
+      const loadingNode = messages.lastElementChild;
+      const answer = await answerQuestion(q);
+      if (loadingNode) {
+        loadingNode.textContent = answer;
+      }
       openChat();
     });
   });
