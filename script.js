@@ -83,6 +83,23 @@
       return '';
     }
 
+    if (
+      q.includes('how many tableau dashboard') ||
+      q.includes('tableau dashboards have you developed') ||
+      q.includes('number of tableau dashboard')
+    ) {
+      return 'I have developed 40+ Tableau dashboards. Some representative samples are available on my Tableau Public profile: https://public.tableau.com/app/profile/shahistha.sultana.k/vizzes';
+    }
+
+    if (
+      q.includes('how many oac dashboard') ||
+      q.includes('oac dashboards have you developed') ||
+      q.includes('number of oac dashboard') ||
+      q.includes('how many oracle analytics cloud dashboard')
+    ) {
+      return 'I have developed and delivered 20+ OAC dashboards across enterprise client environments.';
+    }
+
     let best = null;
     let bestScore = 0;
     for (let i = 0; i < rules.length; i += 1) {
