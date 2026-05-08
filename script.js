@@ -143,10 +143,14 @@
       return local;
     }
     const model = await fetchModelAnswer(question);
-    if (model) {
+    if (model && normalize(model) !== 'na') {
       return model;
     }
-    return adaptiveFallbackAnswer(question);
+    const adaptive = adaptiveFallbackAnswer(question);
+    if (adaptive) {
+      return adaptive;
+    }
+    return 'NA';
   };
 
   const openChat = function () {
